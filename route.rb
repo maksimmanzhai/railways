@@ -1,5 +1,5 @@
 class Route
-  attr_reader :list_of_stations
+  attr_reader :list_of_stations, :start, :finish
 
   def initialize(start, finish)
     @start = start
