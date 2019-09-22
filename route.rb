@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# class route
 class Route
   attr_reader :list_of_stations, :start, :finish
 
@@ -14,11 +17,10 @@ class Route
   end
 
   def delete_station(station)
-    @list_of_stations.reject! {|a| a == station}
+    @list_of_stations.reject! { |a| a == station }
   end
 
   def show_list_of_stations
     puts @list_of_stations
   end
-
 end

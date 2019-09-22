@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# class station
 class Station
   attr_reader :trains
 
@@ -7,7 +10,8 @@ class Station
   end
 
   def arriving_train(train)
-    @trains[train.number] = { type: train.type, carriage_count: train.carriage_count }
+    @trains[train.number] = { type: train.type,
+                              carriage_count: train.carriage_count }
   end
 
   def show_trains
@@ -29,5 +33,4 @@ class Station
   def leaving_train(train)
     @trains.delete(train.number)
   end
-
 end

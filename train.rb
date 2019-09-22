@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# class train
 class Train
   attr_reader :number, :type, :carriage_count, :speed
 
@@ -23,19 +26,19 @@ class Train
   def show_carriage_count
     puts @carriage_count
   end
-  
+
   def coupling_carriages
-    @carriage_count += 1 if @speed == 0
+    @carriage_count += 1 if @speed.zero?
   end
 
   def uncoupling_carriages
-    @carriage_count -= 1 if @speed == 0
+    @carriage_count -= 1 if @speed.zero?
   end
-  
+
   def routing(route)
     @route = route
   end
-  
+
   def starting_station
     @index = 0
     @start = @route.list_of_stations[@index]
@@ -56,5 +59,4 @@ class Train
     puts "current station: #{@current_station}"
     puts "next station: #{@next_station}"
   end
-
 end
