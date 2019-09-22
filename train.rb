@@ -9,22 +9,15 @@ class Train
     @type = type
     @carriage_count = carriage_count
     @speed = 0
+    @index = 0
   end
 
-  def up_speed
-    @speed += 10
+  def up_speed(arg)
+    @speed += arg
   end
 
-  def show_speed
-    puts @speed
-  end
-
-  def brake_speed
+  def stop
     @speed = 0
-  end
-
-  def show_carriage_count
-    puts @carriage_count
   end
 
   def coupling_carriages
@@ -32,31 +25,43 @@ class Train
   end
 
   def uncoupling_carriages
-    @carriage_count -= 1 if @speed.zero?
+    @carriage_count -= 1 if @speed.zero? && @carriage_count > 0
   end
 
   def routing(route)
     @route = route
   end
 
-  def starting_station
-    @index = 0
-    @start = @route.list_of_stations[@index]
-    @current_station = @start
-    @next_station = @route.list_of_stations[@index + 1]
-    puts @start
+  def starting_station(station)
+    @station = station
+    @current_station = station
   end
 
-  def move(arg)
-    @previous_station = @current_station
-    @index += arg
+  def move_forward
+    @station.leaving_train(self)
+    @index += 1
     @current_station = @route.list_of_stations[@index]
-    @next_station = @route.list_of_stations[@index + 1]
   end
 
-  def return_stations
-    puts "previous station: #{@previous_station}"
+  def move_back
+    @station.leaving_train(self)
+    @index -= 1
+    @current_station = @route.list_of_stations[@index]
+  end
+
+  def previous_station
+    if @index > 0
+      puts "previous station: #{@route.list_of_stations[@index - 1]}"
+    end
+  end
+
+  def current_station
     puts "current station: #{@current_station}"
-    puts "next station: #{@next_station}"
+  end
+
+  def next_station
+    if @index < @route.list_of_stations.size
+      puts "next station: #{@route.list_of_stations[@index + 1]}"
+    end
   end
 end

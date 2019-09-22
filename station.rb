@@ -9,25 +9,18 @@ class Station
     @trains = {}
   end
 
-  def arriving_train(train)
-    @trains[train.number] = { type: train.type,
-                              carriage_count: train.carriage_count }
+  def add_train(train)
+    @trains[train.number] = train
   end
 
-  def show_trains
-    puts "Station #{@name}: #{@trains}"
-  end
-
-  def show_type_of_trains
-    types = []
-    @trains.each_value do |value|
-      types << value[:type]
+  def show_type_of_trains(type)
+    count = 0
+    @trains.select do |train, value|
+      if value.type == type
+        count += 1
+      end
     end
-    counts = Hash.new 0
-    types.each do |type|
-      counts[type] += 1
-    end
-    puts counts
+    return count
   end
 
   def leaving_train(train)
