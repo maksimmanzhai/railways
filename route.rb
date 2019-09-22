@@ -17,7 +17,7 @@ class Route
     @list_of_stations.reject! {|a| a == station}
   end
 
-  def list_of_stations
+  def show_list_of_stations
     puts @list_of_stations
   end
 

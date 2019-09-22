@@ -37,21 +37,24 @@ class Train
   end
   
   def starting_station
-    @list_of_stations
+    @index = 0
+    @start = @route.list_of_stations[@index]
+    @current_station = @start
+    @next_station = @route.list_of_stations[@index + 1]
+    puts @start
   end
 
-  def move_forward
-    
+  def move(arg)
+    @previous_station = @current_station
+    @index += arg
+    @current_station = @route.list_of_stations[@index]
+    @next_station = @route.list_of_stations[@index + 1]
   end
 
-  def move_back
-    
-  end
-
-  def return_station # Возвращать предыдущую станцию, текущую, следующую, на основе маршрута
-    previous_station = nil
-    current_station = nil
-    next_station = nil
+  def return_stations
+    puts "previous station: #{@previous_station}"
+    puts "current station: #{@current_station}"
+    puts "next station: #{@next_station}"
   end
 
 end
