@@ -15,12 +15,11 @@ class Route
   end
 
   def delete_station(station)
-    @list_of_stations.delete(station) if (station != @start) && (station != @finish)
+    return if [start, finish].include?(station)
+    @list_of_stations.delete(station)
   end
 
-  def show_list_of_stations
-    @list_of_stations.each do |station|
-      puts station
-    end
+  def show_list_of_station
+    puts @list_of_stations
   end
 end
