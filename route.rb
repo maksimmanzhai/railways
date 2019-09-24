@@ -19,7 +19,7 @@ class Route
     @list_of_stations.delete(station)
   end
 
-  def show_list_of_stations
+  def show_list_of_station
     puts @list_of_stations
   end
 end

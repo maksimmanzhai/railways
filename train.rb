@@ -27,26 +27,28 @@ class Train
     @carriage_count -= 1 if @speed.zero? && @carriage_count > 0
   end
 
-  def route=(route)
+  def set_route(route)
     @route = route
     @current_station_index = 0
-    @start = @route.start
+    @route.start.add_train(self)
   end
 
   def move_forward
-    @route.list_of_stations[@current_station_index].leaving_train(self)
-    @current_station_index += 1 if next_station.nil?
-    @route.list_of_stations[@current_station_index]
+    return if next_station.nil?
+    @route.list_of_stations[@current_station_index].delete_train(self)
+    @current_station_index += 1
+    @current_station = @route.list_of_stations[@current_station_index]
   end
 
   def move_back
-    @route.list_of_stations[@current_station_index].leaving_train(self)
-    @current_station_index -= 1 if previous_station.nil?
-    @route.list_of_stations[@current_station_index]
+    return if previous_station.nil?
+    @route.list_of_stations[@current_station_index].delete_train(self)
+    @current_station_index -= 1
+    @current_station = @route.list_of_stations[@current_station_index]
   end
 
   def previous_station
-    if @current_station_index > 0
+    if @current_station_index >= 0
       return @route.list_of_stations[@current_station_index - 1]
     end
   end
