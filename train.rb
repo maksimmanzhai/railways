@@ -37,7 +37,6 @@ class Train
     return if next_station.nil?
     current_station.delete_train(self)
     @current_station_index += 1
-    current_station = @route.list_of_stations[@current_station_index]
     current_station.add_train(self)
   end
 
@@ -45,7 +44,6 @@ class Train
     return if previous_station.nil?
     current_station.delete_train(self)
     @current_station_index -= 1
-    current_station
     current_station.add_train(self)
   end
 
