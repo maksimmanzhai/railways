@@ -35,22 +35,23 @@ class Train
 
   def move_forward
     return if next_station.nil?
-    @route.list_of_stations[@current_station_index].delete_train(self)
+    @current_station.delete_train(self)
     @current_station_index += 1
     @current_station = @route.list_of_stations[@current_station_index]
+    @current_station.add_train(self)
   end
 
   def move_back
     return if previous_station.nil?
-    @route.list_of_stations[@current_station_index].delete_train(self)
+    current_station.delete_train(self)
     @current_station_index -= 1
     @current_station = @route.list_of_stations[@current_station_index]
+    @current_station.add_train(self)
   end
 
   def previous_station
-    if @current_station_index >= 0
-      return @route.list_of_stations[@current_station_index - 1]
-    end
+    return unless @current_station_index > 0
+    @route.list_of_stations[@current_station_index - 1]
   end
 
   def current_station

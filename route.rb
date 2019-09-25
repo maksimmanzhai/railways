@@ -19,7 +19,9 @@ class Route
     @list_of_stations.delete(station)
   end
 
-  def show_list_of_station
-    puts @list_of_stations
+  def show_list_of_stations
+    @list_of_stations.each.with_index(1) do |station, index|
+      puts "#{index} - #{station.name}"
+    end
   end
 end
